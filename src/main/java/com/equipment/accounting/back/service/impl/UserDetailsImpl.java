@@ -1,4 +1,4 @@
-package com.equipment.accounting.back.services;
+package com.equipment.accounting.back.service.impl;
 
 import com.equipment.accounting.back.models.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -9,8 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;

@@ -1,6 +1,6 @@
 package com.equipment.accounting.back.configs.jwt;
 
-import com.equipment.accounting.back.services.UserDetailsImpl;
+import com.equipment.accounting.back.service.impl.UserDetailsImpl;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;

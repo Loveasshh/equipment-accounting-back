@@ -10,7 +10,7 @@ import com.equipment.accounting.back.pojo.MessageResponse;
 import com.equipment.accounting.back.pojo.SignupRequest;
 import com.equipment.accounting.back.repository.RoleRepository;
 import com.equipment.accounting.back.repository.UserRepository;
-import com.equipment.accounting.back.services.UserDetailsImpl;
+import com.equipment.accounting.back.service.impl.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

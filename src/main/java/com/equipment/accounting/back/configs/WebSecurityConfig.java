@@ -2,7 +2,7 @@ package com.equipment.accounting.back.configs;
 
 import com.equipment.accounting.back.configs.jwt.AuthEntryPointJwt;
 import com.equipment.accounting.back.configs.jwt.AuthTokenFilter;
-import com.equipment.accounting.back.services.UserDetailsServiceImpl;
+import com.equipment.accounting.back.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

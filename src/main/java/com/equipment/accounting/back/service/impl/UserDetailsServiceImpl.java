@@ -1,4 +1,4 @@
-package com.equipment.accounting.back.services;
+package com.equipment.accounting.back.service.impl;
 
 import com.equipment.accounting.back.models.User;
 import com.equipment.accounting.back.repository.UserRepository;
