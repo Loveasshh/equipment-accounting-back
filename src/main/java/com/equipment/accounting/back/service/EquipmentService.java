@@ -1,6 +1,6 @@
 package com.equipment.accounting.back.service;
 
-import com.equipment.accounting.back.models.Equipment;
+import com.equipment.accounting.back.model.Equipment;
 
 import java.util.List;
 
@@ -11,5 +11,12 @@ public interface EquipmentService {
     void deleteEquipment(Long id);
     Equipment addEquipment (Equipment equipment);
     List<Equipment> getAllEquipment();
+
+    boolean existsEquipmentByEquipmentOrderNumber (String equipmentOrderNumber);
+
+    boolean existsEquipmentByEquipmentSerialNumber (String equipmentSerialNumber);
+
+    boolean existsEquipmentById (Long id);
+
 
 }

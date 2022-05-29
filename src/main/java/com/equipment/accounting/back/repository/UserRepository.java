@@ -1,6 +1,6 @@
 package com.equipment.accounting.back.repository;
 
-import com.equipment.accounting.back.models.User;
+import com.equipment.accounting.back.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

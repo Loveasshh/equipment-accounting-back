@@ -1,6 +1,6 @@
 package com.equipment.accounting.back.service.impl;
 
-import com.equipment.accounting.back.models.User;
+import com.equipment.accounting.back.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

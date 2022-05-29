@@ -1,13 +1,13 @@
 package com.equipment.accounting.back.service.impl;
 
-import com.equipment.accounting.back.models.Category;
-import com.equipment.accounting.back.models.Equipment;
+import com.equipment.accounting.back.model.Category;
 import com.equipment.accounting.back.repository.CategoryRepository;
 import com.equipment.accounting.back.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -22,7 +22,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category getByCategoryName(String categoryName) {
-        return null;
+        return categoryRepository.findByCategoryName(categoryName);
     }
 
     @Override

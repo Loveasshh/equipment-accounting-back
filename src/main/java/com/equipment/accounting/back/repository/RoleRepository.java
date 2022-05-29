@@ -1,7 +1,7 @@
 package com.equipment.accounting.back.repository;
 
-import com.equipment.accounting.back.models.Role;
-import com.equipment.accounting.back.models.RoleEnum;
+import com.equipment.accounting.back.model.Role;
+import com.equipment.accounting.back.model.RoleEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

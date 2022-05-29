@@ -1,6 +1,6 @@
 package com.equipment.accounting.back.service.impl;
 
-import com.equipment.accounting.back.models.Equipment;
+import com.equipment.accounting.back.model.Equipment;
 import com.equipment.accounting.back.repository.EquipmentRepository;
 import com.equipment.accounting.back.service.EquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 
     @Override
     public Equipment getByEquipmentName(String equipmentName) {
-        return null;
+        return equipmentRepository.getEquipmentByEquipmentName(equipmentName);
     }
 
     @Override
@@ -37,5 +37,20 @@ public class EquipmentServiceImpl implements EquipmentService {
     @Override
     public List<Equipment> getAllEquipment() {
         return equipmentRepository.findAll();
+    }
+
+    @Override
+    public boolean existsEquipmentByEquipmentOrderNumber(String equipmentOrderNumber) {
+        return equipmentRepository.existsEquipmentByEquipmentOrderNumber(equipmentOrderNumber);
+    }
+
+    @Override
+    public boolean existsEquipmentByEquipmentSerialNumber(String equipmentSerialNumber) {
+        return equipmentRepository.existsByEquipmentSerialNumber(equipmentSerialNumber);
+    }
+
+    @Override
+    public boolean existsEquipmentById(Long id) {
+        return equipmentRepository.existsById(id);
     }
 }

@@ -1,6 +1,6 @@
 package com.equipment.accounting.back.service.impl;
 
-import com.equipment.accounting.back.models.User;
+import com.equipment.accounting.back.model.User;
 import com.equipment.accounting.back.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

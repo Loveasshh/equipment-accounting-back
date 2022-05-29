@@ -1,8 +1,9 @@
 package com.equipment.accounting.back.service;
 
-import com.equipment.accounting.back.models.Category;
+import com.equipment.accounting.back.model.Category;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CategoryService {
 
