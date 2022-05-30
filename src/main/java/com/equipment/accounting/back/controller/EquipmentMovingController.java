@@ -1,11 +1,9 @@
 package com.equipment.accounting.back.controller;
 
-import com.equipment.accounting.back.model.Category;
 import com.equipment.accounting.back.model.Equipment;
 import com.equipment.accounting.back.model.EquipmentMoving;
 import com.equipment.accounting.back.model.User;
 import com.equipment.accounting.back.request.EquipmentMovingRq;
-import com.equipment.accounting.back.request.EquipmentRq;
 import com.equipment.accounting.back.response.MessageRs;
 import com.equipment.accounting.back.service.impl.EquipmentMovingServiceImpl;
 import com.equipment.accounting.back.service.impl.EquipmentServiceImpl;
@@ -15,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.Date;
 import java.sql.Timestamp;
 import java.util.List;
@@ -79,7 +76,18 @@ public class EquipmentMovingController {
 
         return equipmentMovingList;
     }
-
+    @GetMapping("/getAllMovingByEquipment")
+    public List<EquipmentMoving> getAllMovingByEquipment (@RequestParam String equipmentName, @RequestParam String equipmentSerialNumber) {
+        List<EquipmentMoving> equipmentMovings = equipmentMovingService.getAllEquipmentMoving();
+        return equipmentMovings
+                .stream()
+                .filter(equipmentMoving ->
+                    equipmentMoving.getEquipment().getEquipmentName().equals(equipmentName)
+                )
+                .filter(    equipmentMoving ->
+                        equipmentMoving.getEquipment().getEquipmentSerialNumber().equals(equipmentSerialNumber))
+                .collect(Collectors.toList());
+    }
     @GetMapping("/getAllOrderByDate")
     public List<EquipmentMoving> getAllEquipmentMovingOrderByDate () {
         return equipmentMovingService.findAllByOOrderByMovingDateDesc();

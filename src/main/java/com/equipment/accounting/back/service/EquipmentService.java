@@ -12,6 +12,8 @@ public interface EquipmentService {
     Equipment addEquipment (Equipment equipment);
     List<Equipment> getAllEquipment();
 
+    List<Equipment> addAll(List<Equipment> equipmentList);
+
     boolean existsEquipmentByEquipmentOrderNumber (String equipmentOrderNumber);
 
     boolean existsEquipmentByEquipmentSerialNumber (String equipmentSerialNumber);

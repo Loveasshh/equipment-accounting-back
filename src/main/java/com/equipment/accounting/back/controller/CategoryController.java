@@ -1,18 +1,12 @@
 package com.equipment.accounting.back.controller;
 
 import com.equipment.accounting.back.model.Category;
-import com.equipment.accounting.back.model.Equipment;
-import com.equipment.accounting.back.model.EquipmentMoving;
-import com.equipment.accounting.back.model.User;
-import com.equipment.accounting.back.request.EquipmentMovingRq;
 import com.equipment.accounting.back.response.MessageRs;
 import com.equipment.accounting.back.service.impl.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 @RestController

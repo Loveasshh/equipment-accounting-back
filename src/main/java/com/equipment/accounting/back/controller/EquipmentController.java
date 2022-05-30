@@ -2,21 +2,18 @@ package com.equipment.accounting.back.controller;
 
 import com.equipment.accounting.back.model.Category;
 import com.equipment.accounting.back.model.Equipment;
-import com.equipment.accounting.back.model.EquipmentMoving;
-import com.equipment.accounting.back.model.User;
-import com.equipment.accounting.back.repository.UserRepository;
+import com.equipment.accounting.back.request.EquipmentAllRq;
 import com.equipment.accounting.back.request.EquipmentRq;
-import com.equipment.accounting.back.repository.EquipmentRepository;
 import com.equipment.accounting.back.response.MessageRs;
 import com.equipment.accounting.back.service.impl.CategoryServiceImpl;
 import com.equipment.accounting.back.service.impl.EquipmentServiceImpl;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/equipment")
@@ -30,7 +27,7 @@ public class EquipmentController {
     CategoryServiceImpl categoryService;
 
     @PostMapping("/add")
-    public ResponseEntity<?> addEquipment (@RequestBody EquipmentRq equipmentRq) {
+    public ResponseEntity<?> addEquipment (@RequestBody com.equipment.accounting.back.request.EquipmentRq equipmentRq) {
 
         String equipmentName;
         String equipmentDescription;
@@ -61,6 +58,22 @@ public class EquipmentController {
 
         equipmentService.addEquipment(equipment);
 
+        return ResponseEntity.ok(new MessageRs("Equipment added"));
+
+    }
+
+    @PostMapping("/addAll")
+    public ResponseEntity<?> addAll (@RequestBody EquipmentAllRq equipmentAllRq) {
+
+        List<EquipmentRq>  equipmentRqs = equipmentAllRq.getEquipmentList();
+        List<Equipment> equipmentList = new ArrayList<>();
+        for(EquipmentRq equipmentRq: equipmentRqs) {
+            String categoryName = equipmentRq.getCategoryName();
+            Category category = categoryService.getByCategoryName(categoryName);
+            Equipment equipment = new Equipment(equipmentRq.getEquipmentName(), "", equipmentRq.getEquipmentOrderNumber(), equipmentRq.getEquipmentSerialNumber(), category);
+            equipmentList.add(equipment);
+        }
+        int x = 1;
         return ResponseEntity.ok(new MessageRs("Equipment added"));
 
     }

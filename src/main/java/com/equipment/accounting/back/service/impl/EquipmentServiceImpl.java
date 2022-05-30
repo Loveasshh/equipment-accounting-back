@@ -45,6 +45,11 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
+    public List<Equipment> addAll(List<Equipment> equipmentList) {
+        return equipmentRepository.saveAllAndFlush(equipmentList);
+    }
+
+    @Override
     public boolean existsEquipmentByEquipmentSerialNumber(String equipmentSerialNumber) {
         return equipmentRepository.existsByEquipmentSerialNumber(equipmentSerialNumber);
     }
