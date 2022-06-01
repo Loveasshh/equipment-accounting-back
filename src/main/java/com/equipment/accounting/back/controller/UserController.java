@@ -19,4 +19,9 @@ public class UserController {
         return userService.getByUserUsername(name);
     }
 
+    @ResponseBody
+    @GetMapping("/existByUsername")
+    public boolean existByName (@RequestParam String username) {
+        return userService.existUserByName(username);
+    }
 }

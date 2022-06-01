@@ -11,4 +11,5 @@ public interface EquipmentRepository extends JpaRepository<Equipment, Long> {
     boolean existsByEquipmentSerialNumber (String equipmentSerialNumber);
 
     Equipment getEquipmentByEquipmentName (String equipmentName);
+
 }

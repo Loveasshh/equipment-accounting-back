@@ -94,4 +94,11 @@ public class EquipmentController {
     public Equipment getEquipmentByName(@RequestParam String equipmentName) {
         return equipmentService.getByEquipmentName(equipmentName);
     }
+
+    @ResponseBody
+    @GetMapping("/existBySerialNumber")
+    public boolean existBySerialNumber (@RequestParam String serialNumber) {
+        return equipmentService.existsEquipmentByEquipmentSerialNumber(serialNumber);
+    }
+
 }

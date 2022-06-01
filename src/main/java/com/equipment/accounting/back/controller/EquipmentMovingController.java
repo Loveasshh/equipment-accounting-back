@@ -12,8 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,7 +37,7 @@ public class EquipmentMovingController {
     public ResponseEntity<?> addEquipmentMoving (@RequestBody EquipmentMovingRq equipmentMovingRq) {
         Long userId = equipmentMovingRq.getUserId();
         Long equipmentId = equipmentMovingRq.getEquipmentId();
-        Timestamp movingDate = new Timestamp(new Date().getTime());
+        Date movingDate = new Date(Calendar.getInstance().getTime().getTime());
         String movingType = equipmentMovingRq.getMovingType();
         String movingTo = equipmentMovingRq.getMovingTo();
         String movingFrom = equipmentMovingRq.getMovingFrom();

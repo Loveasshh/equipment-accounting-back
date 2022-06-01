@@ -3,6 +3,7 @@ package com.equipment.accounting.back.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
@@ -22,7 +23,7 @@ public class EquipmentMoving {
     @JsonManagedReference
     private Equipment equipment;
 
-    private Timestamp movingDate;
+    private Date movingDate;
 
     private String movingType;
 
@@ -39,7 +40,7 @@ public class EquipmentMoving {
     public EquipmentMoving() {
     }
 
-    public EquipmentMoving(User user, Equipment equipment, Timestamp movingDate, String movingType, String movingTo, String movingFrom, String purpose, Boolean isTemporary, String description) {
+    public EquipmentMoving(User user, Equipment equipment, Date movingDate, String movingType, String movingTo, String movingFrom, String purpose, Boolean isTemporary, String description) {
         this.user = user;
         this.equipment = equipment;
         this.movingDate = movingDate;
@@ -59,11 +60,11 @@ public class EquipmentMoving {
         this.id = id;
     }
 
-    public Timestamp getMovingDate() {
+    public Date getMovingDate() {
         return movingDate;
     }
 
-    public void setMovingDate(Timestamp movingDate) {
+    public void setMovingDate(Date movingDate) {
         this.movingDate = movingDate;
     }
 
