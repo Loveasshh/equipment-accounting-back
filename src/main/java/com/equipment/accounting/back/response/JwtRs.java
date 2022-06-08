@@ -10,11 +10,14 @@ public class JwtRs {
     private String username;
     private List<String> roles;
 
-    public JwtRs(String token, Long id, String username, List<String> roles) {
+    private boolean isEmployee;
+
+    public JwtRs(String token, Long id, String username, List<String> roles, boolean isEmployee) {
         this.token = token;
         this.id = id;
         this.username = username;
         this.roles = roles;
+        this.isEmployee = isEmployee;
     }
 
     public String getToken() {
@@ -57,4 +60,11 @@ public class JwtRs {
         this.roles = roles;
     }
 
+    public boolean getIsEmployee() {
+        return isEmployee;
+    }
+
+    public void setIsEmployee(boolean employee) {
+        isEmployee = employee;
+    }
 }

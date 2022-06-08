@@ -39,6 +39,7 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+        this.isEmployee = true;
     }
 
     public Long getId() {
@@ -63,6 +64,15 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getIsEmployee() {
+        return isEmployee;
+    }
+
+    public void setIsEmployee(Boolean employee) {
+        isEmployee = employee;
+        int i = 1;
     }
 
     public Set<Role> getRoles() {

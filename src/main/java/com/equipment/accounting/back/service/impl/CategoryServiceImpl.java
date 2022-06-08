@@ -39,4 +39,9 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
     }
+
+    @Override
+    public boolean existsByCategoryName(String equipmentCategory) {
+        return categoryRepository.existsByCategoryName(equipmentCategory);
+    }
 }

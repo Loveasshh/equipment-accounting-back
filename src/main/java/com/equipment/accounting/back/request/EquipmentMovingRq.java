@@ -13,7 +13,9 @@ public class EquipmentMovingRq {
 
     private String purpose;
 
-    private Boolean isTemporary;
+    private String isTemporary;
+
+    private String returnDate;
 
     private String description;
 
@@ -65,12 +67,20 @@ public class EquipmentMovingRq {
         this.purpose = purpose;
     }
 
-    public Boolean getIsTemporary() {
+    public String getIsTemporary() {
         return isTemporary;
     }
 
-    public void setIsTemporary(Boolean temporary) {
+    public void setIsTemporary(String temporary) {
         isTemporary = temporary;
+    }
+
+    public String getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(String returnDate) {
+        this.returnDate = returnDate;
     }
 
     public String getDescription() {

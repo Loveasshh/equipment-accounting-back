@@ -33,14 +33,17 @@ public class EquipmentMoving {
 
     private String purpose;
 
-    private Boolean isTemporary;
+    private String isTemporary;
+
+    private String returnDate;
 
     private String description;
 
     public EquipmentMoving() {
     }
 
-    public EquipmentMoving(User user, Equipment equipment, Date movingDate, String movingType, String movingTo, String movingFrom, String purpose, Boolean isTemporary, String description) {
+    public EquipmentMoving(User user, Equipment equipment, Date movingDate, String movingType, String movingTo,
+               String movingFrom, String purpose, String isTemporary,String returnDate, String description) {
         this.user = user;
         this.equipment = equipment;
         this.movingDate = movingDate;
@@ -49,6 +52,7 @@ public class EquipmentMoving {
         this.movingFrom = movingFrom;
         this.purpose = purpose;
         this.isTemporary = isTemporary;
+        this.returnDate = returnDate;
         this.description = description;
     }
 
@@ -88,6 +92,14 @@ public class EquipmentMoving {
         return movingFrom;
     }
 
+    public String getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(String returnDate) {
+        this.returnDate = returnDate;
+    }
+
     public void setMovingFrom(String movingFrom) {
         this.movingFrom = movingFrom;
     }
@@ -100,11 +112,11 @@ public class EquipmentMoving {
         this.purpose = purpose;
     }
 
-    public Boolean getTemporary() {
+    public String getIsTemporary() {
         return isTemporary;
     }
 
-    public void setTemporary(Boolean temporary) {
+    public void setIsTemporary(String temporary) {
         isTemporary = temporary;
     }
 

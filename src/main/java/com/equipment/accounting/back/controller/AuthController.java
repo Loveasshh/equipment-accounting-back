@@ -11,6 +11,7 @@ import com.equipment.accounting.back.request.SignupRq;
 import com.equipment.accounting.back.repository.RoleRepository;
 import com.equipment.accounting.back.repository.UserRepository;
 import com.equipment.accounting.back.service.impl.UserDetailsImpl;
+import com.equipment.accounting.back.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -37,6 +38,9 @@ public class AuthController {
     UserRepository userRespository;
 
     @Autowired
+    UserServiceImpl userService;
+
+    @Autowired
     RoleRepository roleRepository;
 
     @Autowired
@@ -47,6 +51,7 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authUser(@RequestBody LoginRq loginRq) {
+        boolean isEmployee = true;
 
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(
@@ -60,11 +65,14 @@ public class AuthController {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
-
+        if (userService.existUserById(userDetails.getId())) {
+            isEmployee = userService.getByUserId(userDetails.getId()).getIsEmployee();
+        }
+        int i = 1;
         return ResponseEntity.ok(new JwtRs(jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),
-                roles));
+                roles, isEmployee));
     }
 
     @PostMapping("/signup")

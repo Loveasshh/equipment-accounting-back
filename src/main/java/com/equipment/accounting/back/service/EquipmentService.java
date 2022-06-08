@@ -20,5 +20,6 @@ public interface EquipmentService {
 
     boolean existsEquipmentById (Long id);
 
+    boolean existsEquipmentByName (String equipmentName);
 
 }

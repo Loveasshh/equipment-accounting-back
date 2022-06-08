@@ -12,5 +12,5 @@ public interface CategoryService {
     void deleteCategory(Long id);
     Category addCategory (Category category);
     List<Category> getAllCategories();
-
+    boolean existsByCategoryName(String equipmentCategory);
 }

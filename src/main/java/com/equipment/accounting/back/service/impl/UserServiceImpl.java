@@ -31,4 +31,14 @@ public class UserServiceImpl implements UserService {
     public Boolean existUserByName(String username) {
         return userRepository.existsByUsername(username);
     }
+
+    @Override
+    public void deleteByUserName(String username) {
+        userRepository.findByUsername(username).get().setIsEmployee(false);
+    }
+
+    @Override
+    public int setIsEmployeeForUser(boolean isEmployee, String username) {
+        return userRepository.setIsEmployeeForUser(isEmployee,username);
+    }
 }

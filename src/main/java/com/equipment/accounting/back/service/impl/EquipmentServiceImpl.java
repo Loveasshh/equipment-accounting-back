@@ -58,4 +58,9 @@ public class EquipmentServiceImpl implements EquipmentService {
     public boolean existsEquipmentById(Long id) {
         return equipmentRepository.existsById(id);
     }
+
+    @Override
+    public boolean existsEquipmentByName(String equipmentName) {
+        return equipmentRepository.existsByEquipmentName(equipmentName);
+    }
 }

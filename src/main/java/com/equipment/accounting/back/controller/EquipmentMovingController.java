@@ -1,10 +1,13 @@
 package com.equipment.accounting.back.controller;
 
+import com.equipment.accounting.back.model.Category;
 import com.equipment.accounting.back.model.Equipment;
 import com.equipment.accounting.back.model.EquipmentMoving;
 import com.equipment.accounting.back.model.User;
+import com.equipment.accounting.back.request.EquipmentMovingExcelRq;
 import com.equipment.accounting.back.request.EquipmentMovingRq;
 import com.equipment.accounting.back.response.MessageRs;
+import com.equipment.accounting.back.service.impl.CategoryServiceImpl;
 import com.equipment.accounting.back.service.impl.EquipmentMovingServiceImpl;
 import com.equipment.accounting.back.service.impl.EquipmentServiceImpl;
 import com.equipment.accounting.back.service.impl.UserServiceImpl;
@@ -12,11 +15,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @RestController
@@ -33,8 +40,13 @@ public class EquipmentMovingController {
     @Autowired
     EquipmentServiceImpl equipmentService;
 
+    @Autowired
+    CategoryServiceImpl categoryService;
+
     @PostMapping("/addEquipmentMoving")
     public ResponseEntity<?> addEquipmentMoving (@RequestBody EquipmentMovingRq equipmentMovingRq) {
+        String isTemporary;
+        String returnDate;
         Long userId = equipmentMovingRq.getUserId();
         Long equipmentId = equipmentMovingRq.getEquipmentId();
         Date movingDate = new Date(Calendar.getInstance().getTime().getTime());
@@ -42,25 +54,68 @@ public class EquipmentMovingController {
         String movingTo = equipmentMovingRq.getMovingTo();
         String movingFrom = equipmentMovingRq.getMovingFrom();
         String purpose = equipmentMovingRq.getPurpose();
-        Boolean isTemporary = equipmentMovingRq.getIsTemporary();
-        String description = equipmentMovingRq.getDescription();
 
+        if (movingType.equals("Приход")) {
+            isTemporary = "Нет";
+            returnDate = "";
+        } else {
+            isTemporary = equipmentMovingRq.getIsTemporary();
+            returnDate = equipmentMovingRq.getReturnDate();
+        }
+
+        String description = equipmentMovingRq.getDescription();
         User user = userService.getByUserId(userId);
         Equipment equipment = equipmentService.getByEquipmentId(equipmentId);
 
         EquipmentMoving equipmentMoving = new EquipmentMoving(user, equipment, movingDate, movingType,
-                movingTo, movingFrom, purpose, isTemporary, description);
+                movingTo, movingFrom, purpose, isTemporary,returnDate, description);
 
         equipmentMovingService.addEquipmentMoving(equipmentMoving);
         return ResponseEntity.ok(new MessageRs("EquipmentMoving added"));
     }
 
-    @GetMapping("/getAll")
-    public List<EquipmentMoving> getAllEquipmentMoving () {
-        List<EquipmentMoving> equipmentMovings = equipmentMovingService.getAllEquipmentMoving();
-//        equipmentMovings.
-        int i = 1;
-        return equipmentMovingService.getAllEquipmentMoving();
+    @PostMapping("/addEquipmentMovingFromExcel")
+    public ResponseEntity<?> addEquipmentMovingFromExcel (@RequestBody EquipmentMovingExcelRq equipmentMovingExcelRq) throws ParseException {
+
+        String userName = equipmentMovingExcelRq.getUserName();
+        String equipmentName = equipmentMovingExcelRq.getEquipmentName();
+        String equipmentCategory = equipmentMovingExcelRq.getEquipmentCategory();
+        String equipmentSerialNumber = equipmentMovingExcelRq.getEquipmentSerialNumber();
+        String equipmentOrderNumber = equipmentMovingExcelRq.getEquipmentOrderNumber();
+        String movingType = equipmentMovingExcelRq.getMovingType();
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date movingDate = new Date(format.parse(equipmentMovingExcelRq.getMovingDate()).getTime());
+
+        String movingTo = equipmentMovingExcelRq.getMovingTo();
+        String movingFrom = equipmentMovingExcelRq.getMovingFrom();
+        String purpose = equipmentMovingExcelRq.getPurpose();
+        String isTemporary = equipmentMovingExcelRq.getIsTemporary();
+        String returnDate = equipmentMovingExcelRq.getReturnDate();
+        String description = equipmentMovingExcelRq.getDescription();
+
+        Category category;
+        Equipment equipment;
+        User user = userService.getByUserUsername(userName);
+
+        if (categoryService.existsByCategoryName(equipmentCategory)) {
+            category = categoryService.getByCategoryName(equipmentCategory);
+        } else {
+            category = new Category(equipmentCategory);
+            categoryService.addCategory(category);
+        }
+
+        if (equipmentService.existsEquipmentByEquipmentSerialNumber(equipmentSerialNumber) && equipmentService.existsEquipmentByName(equipmentName)) {
+            equipment = equipmentService.getByEquipmentName(equipmentName);
+        } else {
+            equipment = new Equipment(equipmentName, "", equipmentOrderNumber, equipmentSerialNumber, category);
+            equipmentService.addEquipment(equipment);
+        }
+
+        EquipmentMoving equipmentMoving = new EquipmentMoving(user, equipment, movingDate, movingType,
+                movingTo, movingFrom, purpose, isTemporary,returnDate, description);
+
+        equipmentMovingService.addEquipmentMoving(equipmentMoving);
+        return ResponseEntity.ok(new MessageRs("EquipmentMoving added"));
     }
 
     @GetMapping("/getAllWithUniqueEquipment")
